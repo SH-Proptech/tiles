@@ -1,4 +1,4 @@
-FROM gospatial/tegola:latest
+FROM gospatial/tegola:v0.19.0
 COPY config.toml /tegola/config.toml
 
 # Set environment variables for SQL debugging and log level
