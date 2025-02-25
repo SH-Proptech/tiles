@@ -18,6 +18,8 @@ uri = "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?ssl
 
 [[providers.layers]]
 name = "properties"
+# tablename = "public.properties"
+# geometry_fieldname = "geom"
 geometry_fieldname = "geometry"
 id_fieldname = "id"
 geometry_type = "Polygon"
@@ -35,6 +37,6 @@ bounds = [-8.6, 49.9, 1.8, 58.6]
 
 [[maps.layers]]
 provider_layer = "postgis.properties"
-min_zoom = 12
+min_zoom = 10
 max_zoom = 18
-dont_simplify = true
+dont_simplify = false
