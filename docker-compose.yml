@@ -1,0 +1,28 @@
+services:
+  tegola:
+    build: .
+    container_name: tegola
+    env_file:
+      - .env
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config.toml:/tegola/config.toml
+    command: serve --config /tegola/config.toml --log-level=TRACE --logger=zap
+
+  redis:
+    container_name: cache
+    image: redis:latest
+    restart: always
+    ports:
+      - "6060:6379"
+    command: redis-server --requirepass Qwerty123
+
+  nginx:
+    image: nginx:latest
+    container_name: webserver
+    restart: always
+    ports:
+      - "7070:80"  # Serve your example app on port 8080
+    volumes:
+      - ./example:/usr/share/nginx/html:ro  # Mount your example folder

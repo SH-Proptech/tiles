@@ -1,0 +1,40 @@
+[webserver]
+port = ":9090"
+
+[webserver.headers]
+Access-Control-Allow-Origin = "*"
+
+[cache]
+db = 3
+type = "redis"
+max_zoom = 16
+address = "${REDIS_HOST}:${REDIS_PORT}"
+password = "${REDIS_PASSWORD}"
+
+[[providers]]
+name = "postgis"
+type = "postgis"
+uri = "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require"
+
+[[providers.layers]]
+name = "properties"
+geometry_fieldname = "geometry"
+id_fieldname = "id"
+geometry_type = "Polygon"
+sql = """
+    SELECT id, ST_AsBinary(ST_Transform(geometry, 3857)) AS geometry
+    FROM public.properties
+    WHERE ST_Intersects(geometry, ST_Transform(!BBOX!, 27700))
+    AND (area >= 2023)
+    AND (area <= 12140);
+"""
+
+[[maps]]
+name = "properties"
+bounds = [-8.6, 49.9, 1.8, 58.6]
+
+[[maps.layers]]
+provider_layer = "postgis.properties"
+min_zoom = 12
+max_zoom = 18
+dont_simplify = true

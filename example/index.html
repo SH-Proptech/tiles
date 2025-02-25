@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapbox Vector Tile Example</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+      // Initialize Mapbox GL JS
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiYnJlbndlbGwiLCJhIjoiY203ajFkNXBmMDJoeDJrc2RkaWo4b3NydiJ9.SCnruEPucM90CAkMJq92Dg"; // Replace with your Mapbox access token
+
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json",
+        center: [-0.09, 51.505],
+        zoom: 18,
+      });
+
+      map.on("load", function () {
+        // Add vector tile source
+        map.addSource("vector-tiles", {
+          type: "vector",
+          url: "http://localhost:9090/capabilities/properties.json", // URL with placeholders
+        });
+
+        // Add a layer to display the vector tiles
+        map.addLayer({
+          id: "properties-layer",
+          type: "fill",
+          source: "vector-tiles",
+          "source-layer": "properties", // Ensure the layer name matches the vector tile layer name
+          paint: {
+            "fill-color": "#0000FF",
+            "fill-opacity": 0.4,
+          },
+        });
+
+        // Add a click event listener to log the clicked polygon ID
+        map.on("click", "properties-layer", function (e) {
+          const feature = e.features[0]; // Get the clicked feature
+          console.log("Clicked polygon ID:", feature); // Log the ID
+        });
+      });
+    </script>
+  </body>
+</html>

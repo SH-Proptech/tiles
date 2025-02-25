@@ -1,0 +1,22 @@
+{
+  "type": "deployment",
+  "name": "tiles",
+  "domain": {
+    "host": "propmatch.co.uk",
+    "subdomain": "tiles",
+    "production_ssl": true
+  },
+  "image": {
+    "repo": "propacr.azurecr.io",
+    "name": "tiles",
+    "tag": "latest"
+  },
+  "container": {
+    "replicaCount": 2,
+    "port": 8080,
+    "path": "/maps"
+  },
+  "op": {
+    "item": "prop-tiles"
+  }
+}
