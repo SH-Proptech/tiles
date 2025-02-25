@@ -14,7 +14,7 @@
   "container": {
     "replicaCount": 2,
     "port": 8080,
-    "path": "/maps"
+    "path": "/"
   },
   "op": {
     "item": "prop-tiles"
