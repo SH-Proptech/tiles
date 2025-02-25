@@ -14,7 +14,8 @@
   "container": {
     "replicaCount": 2,
     "port": 8080,
-    "path": "/"
+    "path": "/",
+    "healthEndpoint": "/capabilities/properties.json"
   },
   "op": {
     "item": "prop-tiles"
