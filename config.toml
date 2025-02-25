@@ -1,5 +1,5 @@
 [webserver]
-port = ":9090"
+port = ":8080"
 
 [webserver.headers]
 Access-Control-Allow-Origin = "*"
