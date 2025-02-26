@@ -15,6 +15,16 @@ function seed {
         --min-zoom 5
 }
 
+function seed_prd {
+    local ITEM=prop-tiles
+    DP=$(op item get "$ITEM" --field DB_PASSWORD --reveal)
+    RP=$(op item get "$ITEM" --field REDIS_PASSWORD --reveal)
+    DB_HOST=prop-blue-server.postgres.database.azure.com DB_PORT=5432 DB_NAME=prop-db DB_USER=prop DB_PASSWORD=${DP} REDIS_HOST=localhost REDIS_PORT=6379 REDIS_PASSWORD=${RP} tegola cache seed \
+        --bounds "-8.6,49.9,1.8,58.6" \
+        --max-zoom 9 \
+        --min-zoom 5
+}
+
 # ---------- Do NOT edit below --------------
 
 function help { ## Display usage for this application

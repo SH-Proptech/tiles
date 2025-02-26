@@ -6,4 +6,4 @@ COPY config.toml /tegola/config.toml
 # ENV TEGOLA_LOG_LEVEL=TRACE
 
 # Start Tegola with the config file and debugging enabled
-CMD ["serve", "--config", "/tegola/config.toml"]
+# CMD ["serve", "--config", "/tegola/config.toml"]
