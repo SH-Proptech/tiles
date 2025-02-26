@@ -10,7 +10,7 @@
     "backoffLimit": 0
   },
   "op": {
-    "item": "pimp"
+    "item": "tiles"
   },
   "storage": {
     "enabled": true
