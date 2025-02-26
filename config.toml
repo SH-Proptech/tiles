@@ -8,7 +8,7 @@ Cache-Control = "max-age=300, s-maxage=300"
 [cache]
 db = 3
 type = "redis"
-max_zoom = 16
+max_zoom = 18
 address = "${REDIS_HOST}:${REDIS_PORT}"
 password = "${REDIS_PASSWORD}"
 
