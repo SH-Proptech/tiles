@@ -10,7 +10,7 @@
     "backoffLimit": 0
   },
   "op": {
-    "item": "tiles"
+    "item": "prop-tiles"
   },
   "storage": {
     "enabled": true
