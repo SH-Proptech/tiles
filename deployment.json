@@ -20,5 +20,5 @@
   "op": {
     "item": "prop-tiles"
   },
-  "args": ["serve", "--config", "/tegola/config.toml"]
+  "args": ["serve", "--config", "/tegola/config.toml", "--logger", "zap"]
 }
