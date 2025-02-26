@@ -1,6 +1,6 @@
 {
   "type": "job",
-  "name": "tiles",
+  "name": "tiles-seed",
   "image": {
     "repo": "propacr.azurecr.io",
     "name": "tiles",
