@@ -3,6 +3,7 @@ port = ":8080"
 
 [webserver.headers]
 Access-Control-Allow-Origin = "*"
+Cache-Control = "max-age=300, s-maxage=300"
 
 [cache]
 db = 3
@@ -18,8 +19,6 @@ uri = "postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?ssl
 
 [[providers.layers]]
 name = "properties"
-# tablename = "public.properties"
-# geometry_fieldname = "geom"
 geometry_fieldname = "geometry"
 id_fieldname = "id"
 geometry_type = "Polygon"
@@ -40,3 +39,50 @@ provider_layer = "postgis.properties"
 min_zoom = 10
 max_zoom = 18
 dont_simplify = false
+
+# ## PLANNING MAPS
+
+# [[maps]]
+# name = "planning"
+# bounds = [-8.6, 49.9, 1.8, 58.6]
+
+# # GREEN BELT
+
+# [[providers.layers]]
+# name = "green-belt"
+# geometry_fieldname = "geometry"
+# id_fieldname = "id"
+# geometry_type = "MultiPolygon"
+# sql = """
+#     SELECT id, ST_AsBinary(ST_Transform(geometry, 3857)) AS geometry
+#     FROM public.green_belts
+#     WHERE ST_Intersects(geometry, ST_Transform(!BBOX!, 27700));
+# """
+
+# [[maps.layers]]
+# provider_layer = "postgis.green-belt"
+# name = "green-belt"
+# min_zoom = 5
+# max_zoom = 18
+# dont_simplify = false
+
+# # FLOOD RISK ZONES
+
+# [[providers.layers]]
+# name = "flood-risk-zones"
+# geometry_fieldname = "geometry"
+# id_fieldname = "id"
+# geometry_type = "MultiPolygon"
+# sql = """
+#     SELECT id, ST_AsBinary(ST_Transform(geometry, 3857)) AS geometry
+#     FROM public.flood_risk_zones
+#     WHERE ST_Intersects(geometry, ST_Transform(!BBOX!, 27700));
+# """
+
+
+# [[maps.layers]]
+# provider_layer = "postgis.flood-risk-zones"
+# name = "flood-risk-zones"
+# min_zoom = 5
+# max_zoom = 18
+# dont_simplify = false
