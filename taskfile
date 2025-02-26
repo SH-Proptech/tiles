@@ -8,6 +8,13 @@ function serve {
     python3 -m http.server -d ./example
 }
 
+function seed {
+    DB_HOST=prop-blue-server.postgres.database.azure.com DB_PORT=5432 DB_NAME=prop-db DB_USER=prop DB_PASSWORD=my-password REDIS_HOST=localhost REDIS_PORT=6060 REDIS_PASSWORD=Qwerty123 tegola cache seed \
+        --bounds "-8.6,49.9,1.8,58.6" \
+        --max-zoom 9 \
+        --min-zoom 5
+}
+
 # ---------- Do NOT edit below --------------
 
 function help { ## Display usage for this application

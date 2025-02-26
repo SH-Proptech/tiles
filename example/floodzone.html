@@ -30,33 +30,44 @@
 
       const map = new mapboxgl.Map({
         container: "map",
-        style:
-          "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-        center: [-0.09, 51.505],
-        zoom: 18,
+        style: {
+          version: 8,
+          sources: {},
+          layers: [],
+        },
+        center: [-1.2577, 52.852],
+        zoom: 6,
       });
 
       map.on("load", function () {
-        // Add vector tile source
-        map.addSource("properties", {
+        map.addSource("flood-risk-zone", {
           type: "vector",
-          url: "http://localhost:9090/capabilities/properties.json", // URL with placeholders
+          tiles: [
+            "http://local.propmatch.co.uk:8080/tiles/flood-risk-zone/{z}/{x}/{y}.vector.pbf",
+          ],
+          minzoom: 6,
+          maxzoom: 18,
+          promoteId: "id", // Ensure a unique ID exists
+          // Force accept gzip (this may be redundant, but worth testing)
+          headers: {
+            "Accept-Encoding": "gzip, deflate",
+          },
         });
 
         // Add a layer to display the vector tiles
         map.addLayer({
-          id: "properties",
+          id: "flood-risk-zone",
           type: "fill",
-          source: "properties",
-          "source-layer": "properties", // Ensure the layer name matches the vector tile layer name
+          source: "flood-risk-zone",
+          "source-layer": "flood-risk-zone", // Ensure the layer name matches the vector tile layer name
           paint: {
             "fill-color": "#FF00FF",
-            "fill-opacity": 0.5,
+            "fill-opacity": 0.2,
           },
         });
 
         // Add a click event listener to log the clicked polygon ID
-        map.on("click", "properties", function (e) {
+        map.on("click", "flood-risk-zone", function (e) {
           const feature = e.features[0]; // Get the clicked feature
           console.log("Clicked polygon ID:", feature.id); // Log the ID
         });
