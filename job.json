@@ -7,13 +7,11 @@
     "tag": "latest"
   },
   "container": {
-    "backoffLimit": 0
+    "backoffLimit": 0,
+    "secondsToLive": 604800
   },
   "op": {
     "item": "prop-tiles"
-  },
-  "storage": {
-    "enabled": true
   },
   "args": [
     "cache",
