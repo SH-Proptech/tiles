@@ -19,5 +19,6 @@
   },
   "op": {
     "item": "prop-tiles"
-  }
+  },
+  "command": ["serve", "--config", "/tegola/config.toml"]
 }

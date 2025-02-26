@@ -1,0 +1,18 @@
+{
+  "type": "job",
+  "name": "tiles-seed",
+  "image": {
+    "repo": "propacr.azurecr.io",
+    "name": "tiles",
+    "tag": "latest"
+  },
+  "container": {
+    "backoffLimit": 0
+  },
+  "op": {
+    "item": "pimp"
+  },
+  "storage": {
+    "enabled": true
+  }
+}
