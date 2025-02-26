@@ -30,9 +30,10 @@ jobs:
             const fs = require('fs');
             const file = fs.readFileSync('job.json', 'utf8');
             const data = JSON.parse(file); 
+            const args = data.args;
             const maxZoom = ${{ github.event.inputs.maxZoom }};
             const minZoom = ${{ github.event.inputs.minZoom }};
-            data.args = ['cache','seed'].concat([
+            data.args = args.concat([
               `--max-zoom=${maxZoom}`,
               `--min-zoom=${minZoom}`
             ])

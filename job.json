@@ -14,5 +14,13 @@
   },
   "storage": {
     "enabled": true
-  }
+  },
+  "args": [
+    "cache",
+    "seed",
+    "--config",
+    "/tegola/config.toml",
+    "--logger",
+    "zap"
+  ]
 }
